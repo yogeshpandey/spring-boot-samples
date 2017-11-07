@@ -6,6 +6,7 @@ import netgloo.models.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -24,7 +25,7 @@ public class UserController {
    */
   @RequestMapping(value="/create")
   @ResponseBody
-  public String create(String email, String name) {
+  public String create(@RequestParam String email,@RequestParam String name) {
     try {
       User user = new User(email, name);
       userDao.create(user);
@@ -56,7 +57,7 @@ public class UserController {
    */
   @RequestMapping(value="/get-by-email")
   @ResponseBody
-  public String getByEmail(String email) {
+  public String getByEmail(@RequestParam  String email) {
     String userId;
     try {
       User user = userDao.getByEmail(email);
@@ -73,7 +74,7 @@ public class UserController {
    */
   @RequestMapping(value="/update")
   @ResponseBody
-  public String updateName(long id, String email, String name) {
+  public String updateName(@RequestParam  long id,@RequestParam  String email,@RequestParam  String name) {
     try {
       User user = userDao.getById(id);
       user.setEmail(email);
